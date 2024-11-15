@@ -157,3 +157,26 @@ class The_Game:
 
     def display_money_and_bet(self):
         print(f"Casino owns {self.money} and the current bet is {self.bet}")
+
+print("Welcome to the Blackjack App!")
+print("The minimum bet at this table is $20.")
+bet = int(input("How much money are you willing to play with today:"))
+game = Game(bet)
+
+playing = True
+
+while playing:
+    game_deck = Deck()
+    game_deck.build_deck()
+    game_deck.shuffle_deck()
+    player = Player()
+    dealer = Dealer()
+
+    game.display_money()
+    game.set_bet()
+    player.draw_hand(game_deck)
+    dealer.draw_hand(game_deck)
+    game.display_money_and_bet()
+
+    print("Dealer's first card is:", dealer.hand[0])
+    playing = False
