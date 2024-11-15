@@ -180,3 +180,14 @@ while playing:
 
     print("Dealer's first card is:", dealer.hand[0])
     playing = False
+
+playing_hand = True
+while playing_hand == True:
+    Player.display_hand()
+    Player.get_hand()
+    Player.update_hand()
+
+Dealer.hit()
+Dealer.display_hand()
+game.scoring()
+game.payout()
