@@ -54,7 +54,7 @@ class Player:
         ace_in_hand = False
         for card in self.hand:
             self.hand_value += card.value
-            if card.suit == "A":
+            if card.rank == "A":
                 ace_in_hand = True
         if self.hand_value > 21 and ace_in_hand:
             self.hand_value -= 10
