@@ -54,7 +54,7 @@ class Player:
         ace_in_hand = False
         for card in self.hand:
             self.hand_value += card.value
-            if card.rank == "A":
+            if card.suit == "A":
                 ace_in_hand = True
         if self.hand_value > 21 and ace_in_hand:
             self.hand_value -= 10
@@ -100,5 +100,60 @@ class the_dealer:
             self.hand.append(deck.deal_card())
             self.get_hand_value()
 
+class The_Game:
+    def __init__(self, money):
+        self.money = money
+        self.bet = 20
+        self.winner = ""
 
+    def set_bet(self):
+        betting = True
+        while betting:
+            bet = int(input("How much would you like to bet? The minimum is 20$: "))
+            if bet < 20:
+                self.bet = 20
+            if bet > self.money:
+                print("You cannot afford the bet. You are BROKE.")
+            else:
+                self.bet = bet
+                betting = False
 
+    def scoring(self, dealer_hand_value, player_hand_value):
+        if player_hand_value == 21:
+            print("Player Black Jack!")
+            self.winner = "Player"
+        elif dealer_hand_value == 21:
+            print("Dealer Black Jack!")
+            self.winner = "Dealer"
+        elif player_hand_value > 21:
+            print("Player Went Over 21.")
+            self.winner = "Dealer"
+        elif dealer_hand_value > 21:
+            print("Dealer Went Over 21.")
+            self.winner = "Player"
+        else:
+            if player_hand_value > dealer_hand_value:
+                print("Player Wins")
+                self.winner = "Player"
+            elif dealer_hand_value > player_hand_value:
+                print("Dealer Wins")
+                self.winner = "Dealer"
+            else:
+                print(f"Tie Money Back")
+
+        print("\n--- Game Summary ---")
+        print(f"Player's Hand Value: {player_hand_value}")
+        print(f"Dealer's Hand Value: {dealer_hand_value}")
+        print(f"Winner: {self.winner}")
+
+    def payout(self):
+        if self.winner == "Player":
+            self.money += self.bet
+        elif self.winner == "Dealer":
+            self.money -= self.bet
+
+    def display_money(self):
+        print(f"Casino owns {self.money}")
+
+    def display_money_and_bet(self):
+        print(f"Casino owns {self.money} and the current bet is {self.bet}")
