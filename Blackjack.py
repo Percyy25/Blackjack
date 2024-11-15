@@ -98,7 +98,7 @@ class the_dealer:
     def hit(self, deck):
         if self.hand_value <= 17:
             self.hand.append(deck.deal_card())
-
+            self.get_hand_value()
 
 
 
