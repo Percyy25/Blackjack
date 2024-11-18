@@ -161,16 +161,16 @@ class The_Game:
 print("Welcome to the Blackjack App!")
 print("The minimum bet at this table is $20.")
 bet = int(input("How much money are you willing to play with today:"))
-game = Game(bet)
+game = The_Game(bet)
 
 playing = True
 
 while playing:
     game_deck = Deck()
-    game_deck.build_deck()
+    game_deck.built_deck()
     game_deck.shuffle_deck()
     player = Player()
-    dealer = Dealer()
+    dealer = the_dealer()
 
     game.display_money()
     game.set_bet()
