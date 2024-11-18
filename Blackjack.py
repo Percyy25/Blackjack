@@ -22,7 +22,7 @@ class Deck:
 
         for suit in suits:
             for rank, value in ranks.items():
-                card = (rank, value, suit)
+                card = Cards(rank, value, suit)
                 self.cards.append(card)
 
     def shuffle_deck(self):
@@ -39,7 +39,7 @@ class Player:
         self.playing_hand = True
 
     def draw_hand(self, deck):
-        for card in deck:
+        for card in deck.cards:
             deck.deal_card()
             self.hand.append(card)
 
@@ -63,7 +63,7 @@ class Player:
     def update_hand(self, deck):
         if self.hand_value < 21:
             if input("Would you like to hit?").capitalize() == "Yes":
-                self.hit(deck)
+                self.hit(deck.cards)
             else:
                 self.playing_hand = False
         else:
@@ -75,7 +75,7 @@ class the_dealer:
         self.playing_hand = True
 
     def draw_hand(self, deck):
-        for card in deck:
+        for card in deck.cards:
             deck.deal_card()
             self.hand.append(card)
 
@@ -181,13 +181,13 @@ while playing:
     print("Dealer's first card is:", dealer.hand[0])
     playing = False
 
-playing_hand = True
-while playing_hand == True:
-    Player.display_hand()
-    Player.get_hand()
-    Player.update_hand()
+    playing_hand = True
+    while playing_hand == True:
+        player.display_hand()
+        player.get_hand()
+        player.update_hand(game_deck)
 
-Dealer.hit()
-Dealer.display_hand()
-game.scoring()
-game.payout()
+    dealer.hit(game_deck)
+    dealer.display_hand()
+    game.scoring(dealer.hand_value, player.hand_value)
+    game.payout()
