@@ -75,8 +75,9 @@ class the_dealer:
         self.playing_hand = True
 
     def draw_hand(self, deck):
-        for _ in range(2):
-            self.hand.append(deck.deal_card())
+        for card in deck.cards:
+            deck.deal_card()
+            self.hand.append(card)
 
     def display_hand(self):
         show_cards = input("Press enter to reveal the dealer's cards.")
@@ -159,8 +160,16 @@ class The_Game:
 
 print("Welcome to the Blackjack App!")
 print("The minimum bet at this table is $20.")
-bet = int(input("How much money are you willing to play with today:"))
-game = The_Game(bet)
+
+while True:
+    bet = int(input("How much money are you willing to play with today: "))
+    game = The_Game(bet)
+    if bet < 20:
+        print("Sorry, not enough money, goodbye.")
+        break
+    else:
+        print("You have successfully entered the game with ${}!".format(bet))
+        break
 
 playing = True
 
