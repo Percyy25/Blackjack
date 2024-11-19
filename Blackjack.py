@@ -39,9 +39,8 @@ class Player:
         self.playing_hand = True
 
     def draw_hand(self, deck):
-        for card in deck.cards:
-            deck.deal_card()
-            self.hand.append(card)
+        for _ in range(2):
+            self.hand.append(deck.deal_card())
 
     def display_hand(self):
         for card in self.hand:
@@ -51,6 +50,7 @@ class Player:
         self.hand.append(deck.deal_card())
 
     def get_hand(self):
+        self.hand_value = 0
         ace_in_hand = False
         for card in self.hand:
             self.hand_value += card.value
@@ -181,11 +181,11 @@ while playing:
     print("Dealer's first card is:", dealer.hand[0])
     playing = False
 
-    playing_hand = True
-    while playing_hand == True:
+    while player.playing_hand == True:
         player.display_hand()
         player.get_hand()
         player.update_hand(game_deck)
+
 
     dealer.hit(game_deck)
     dealer.display_hand()
