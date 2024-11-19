@@ -75,9 +75,8 @@ class the_dealer:
         self.playing_hand = True
 
     def draw_hand(self, deck):
-        for card in deck.cards:
-            deck.deal_card()
-            self.hand.append(card)
+        for _ in range(2):
+            self.hand.append(deck.deal_card())
 
     def display_hand(self):
         show_cards = input("Press enter to reveal the dealer's cards.")
