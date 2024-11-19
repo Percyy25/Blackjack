@@ -7,6 +7,10 @@ class Cards:
         self.value = value
         self.suit = suit
 
+    def __repr__(self):
+        return f"{self.rank} of {self.suit}"
+
+    
     def display_card(self):
         print(f"{self.rank} of {self.suit}")
 
@@ -91,7 +95,7 @@ class the_dealer:
             self.hand_value += card.value
             if card.suit == "A":
                 ace_in_hand = True
-        if self.hand_value > 21 and ace_in_hand:
+        if self.hand_value > 21 and ace_in_hand is True:
             self.hand_value -= 10
 
     def hit(self, deck):
@@ -188,7 +192,7 @@ while playing:
     print("Dealer's first card is:", dealer.hand[0])
     playing = False
 
-    while player.playing_hand == True:
+    while player.playing_hand is True:
         player.display_hand()
         player.get_hand()
         player.update_hand(game_deck)
