@@ -1,6 +1,7 @@
 import random
 import time
 
+
 class Cards:
     def __init__(self, rank, value, suit):
         self.rank = rank
@@ -10,9 +11,9 @@ class Cards:
     def __repr__(self):
         return f"{self.rank} of {self.suit}"
 
-    
     def display_card(self):
         print(f"{self.rank} of {self.suit}")
+
 
 class Deck:
     def __init__(self):
@@ -34,6 +35,7 @@ class Deck:
 
     def deal_card(self):
         return self.cards.pop() if self.cards else None
+
 
 class Player:
 
@@ -66,12 +68,17 @@ class Player:
 
     def update_hand(self, deck):
         if self.hand_value < 21:
-            if input("Would you like to hit?").capitalize() == "Yes":
+            Hit = input("Would you like to hit?").capitalize()
+            if Hit == "Yes" or Hit[0] == "Y":
                 self.hit(deck.cards)
+            elif Hit == "No" or Hit[0] == "N":
+                self.playing_hand = False
             else:
                 self.playing_hand = False
         else:
             self.playing_hand = False
+
+
 class the_dealer:
     def __init__(self):
         self.hand = []
@@ -102,6 +109,7 @@ class the_dealer:
         if self.hand_value <= 17:
             self.hand.append(deck.deal_card())
             self.get_hand_value()
+
 
 class The_Game:
     def __init__(self, money):
@@ -161,6 +169,7 @@ class The_Game:
     def display_money_and_bet(self):
         print(f"Casino owns {self.money} and the current bet is {self.bet}")
 
+
 print("Welcome to the Blackjack App!")
 print("The minimum bet at this table is $20.")
 
@@ -196,7 +205,6 @@ while playing:
         player.display_hand()
         player.get_hand()
         player.update_hand(game_deck)
-
 
     dealer.hit(game_deck)
     dealer.display_hand()
