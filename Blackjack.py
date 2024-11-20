@@ -70,7 +70,7 @@ class Player:
         if self.hand_value < 21:
             Hit = input("Would you like to hit?").capitalize()
             if Hit == "Yes" or Hit[0] == "Y":
-                self.hit(deck.cards)
+                self.hit(deck)
             elif Hit == "No" or Hit[0] == "N":
                 self.playing_hand = False
             else:
@@ -151,6 +151,7 @@ class The_Game:
                 self.winner = "Dealer"
             else:
                 print(f"Tie Money Back")
+                self.winner = "No one"
 
         print("\n--- Game Summary ---")
         print(f"Player's Hand Value: {player_hand_value}")
@@ -173,17 +174,14 @@ class The_Game:
 print("Welcome to the Blackjack App!")
 print("The minimum bet at this table is $20.")
 
-while True:
-    bet = int(input("How much money are you willing to play with today: "))
-    game = The_Game(bet)
-    if bet < 20:
-        print("Sorry, not enough money, goodbye.")
-        break
-    else:
-        print("You have successfully entered the game with ${}!".format(bet))
-        break
-
-playing = True
+bet = int(input("How much money are you willing to play with today: "))
+if bet < 20:
+    print("Sorry, not enough money, goodbye.")
+    playing = False
+else:
+    print("You have successfully entered the game with ${}!".format(bet))
+    playing = True
+game = The_Game(bet)
 
 while playing:
     game_deck = Deck()
@@ -199,7 +197,6 @@ while playing:
     game.display_money_and_bet()
 
     print("Dealer's first card is:", dealer.hand[0])
-    playing = False
 
     while player.playing_hand is True:
         player.display_hand()
@@ -208,5 +205,10 @@ while playing:
 
     dealer.hit(game_deck)
     dealer.display_hand()
+    game.scoring(dealer.hand_value, player.hand_value)
+    game.payout()
+    if game.money < 20:
+        playing = False
+        print("You have ran out of money, You cannot gamble anymore :(")
     game.scoring(dealer.hand_value, player.hand_value)
     game.payout()
