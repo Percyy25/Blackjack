@@ -123,8 +123,11 @@ class The_Game:
             bet = int(input("How much would you like to bet? The minimum is 20$: "))
             if bet < 20:
                 self.bet = 20
+                
             if bet > self.money:
                 print("You cannot afford the bet. You are BROKE.")
+            elif bet < self.bet :
+                print("The minimum bet is 20$. Try again.")
             else:
                 self.bet = bet
                 betting = False
@@ -150,7 +153,7 @@ class The_Game:
                 print("Dealer Wins")
                 self.winner = "Dealer"
             else:
-                print(f"Tie Money Back")
+                print("Tie Money Back")
                 self.winner = "No one"
 
         print("\n--- Game Summary ---")
