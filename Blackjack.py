@@ -59,12 +59,16 @@ class Player:
         self.hand_value = 0
         ace_in_hand = False
         for card in self.hand:
+        #This is iteration
             self.hand_value += card.value
             if card.rank == "A":
+            #This is selection
                 ace_in_hand = True
         if self.hand_value > 21 and ace_in_hand:
+        #This is selection
             self.hand_value -= 10
         print(self.hand_value)
+        #This is sequencing
 
     def update_hand(self, deck):
         if self.hand_value < 21:
@@ -92,9 +96,12 @@ class the_dealer:
     def display_hand(self):
         show_cards = input("Press enter to reveal the dealer's cards.")
         if show_cards == "":
+        #This is selection
             for card in self.hand:
+            #This is iteration
                 time.sleep(1)
                 print(card)
+                #This is sequencing
 
     def get_hand_value(self):
         ace_in_hand = False
@@ -106,6 +113,7 @@ class the_dealer:
             self.hand_value -= 10
 
     def hit(self, deck):
+        self.get_hand_value()
         if self.hand_value <= 17:
             self.hand.append(deck.deal_card())
             self.get_hand_value()
@@ -120,14 +128,15 @@ class The_Game:
     def set_bet(self):
         betting = True
         while betting:
+        #This is iteration
             bet = int(input("How much would you like to bet? The minimum is 20$: "))
             if bet < 20:
-                self.bet = 20
-                
+            #This is selection
+                bet = 20
             if bet > self.money:
+            #This is selection
                 print("You cannot afford the bet. You are BROKE.")
-            elif bet < self.bet :
-                print("The minimum bet is 20$. Try again.")
+                #This is sequencing
             else:
                 self.bet = bet
                 betting = False
@@ -153,7 +162,7 @@ class The_Game:
                 print("Dealer Wins")
                 self.winner = "Dealer"
             else:
-                print("Tie Money Back")
+                print(f"Tie Money Back")
                 self.winner = "No one"
 
         print("\n--- Game Summary ---")
