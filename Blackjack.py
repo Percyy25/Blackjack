@@ -112,11 +112,20 @@ class the_dealer:
         if self.hand_value > 21 and ace_in_hand is True:
             self.hand_value -= 10
 
+    def update_hand_value(self):
+        ace_in_hand = False
+        Last_card = self.hand[-1]
+        self.hand_value += Last_card.value
+        if Last_card.suit == "A":
+            ace_in_hand = True
+        if self.hand_value > 21 and ace_in_hand is True:
+            self.hand_value -= 10
+
     def hit(self, deck):
         self.get_hand_value()
         if self.hand_value <= 17:
             self.hand.append(deck.deal_card())
-            self.get_hand_value()
+            self.update_hand_value()
 
 
 class The_Game:
@@ -220,5 +229,7 @@ while playing:
     game.scoring(dealer.hand_value, player.hand_value)
     game.payout()
     if game.money < 20:
+        playing = False
+        print("You have ran out of money, You cannot gamble anymore :(")
         playing = False
         print("You have ran out of money, You cannot gamble anymore :(")
