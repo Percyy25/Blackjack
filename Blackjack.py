@@ -231,5 +231,3 @@ while playing:
     if game.money < 20:
         playing = False
         print("You have ran out of money, You cannot gamble anymore :(")
-        playing = False
-        print("You have ran out of money, You cannot gamble anymore :(")
